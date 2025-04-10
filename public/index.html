@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝗧𝗢𝗦𝗛𝗜 𝗧𝗜𝗞𝗧𝗢𝗞 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗘𝗥 𝗕𝗢𝗧 𝗥𝗔𝗡𝗞𝗜𝗡𝗚𝗦</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1F1B24;
+            color: #E0E0E0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 100%;
+            background-color: #121212;
+            color: white;
+            border-collapse: collapse;
+            border: 1px solid #ffffff;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #2D2D2D;
+        }
+
+        tr:hover {
+            background-color: #333;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: white;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center">
+
+    <div class="container mx-auto p-6 w-full max-w-5xl">
+        <h1 class="text-center text-4xl text-magenta-500 mb-6">𝗧𝗢𝗦𝗛𝗜 𝗕𝗢𝗧 𝗥𝗔𝗡𝗞𝗜𝗡𝗚𝗦</h1>
+        <div class="divider"></div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-left">𝗥𝗔𝗡𝗞</th>
+                        <th class="text-left">𝗨𝗦𝗘𝗥 𝗜𝗗</th>
+                        <th class="text-left">𝗨𝗦𝗘𝗥 𝗡𝗔𝗠𝗘</th>
+                        <th class="text-left">𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗦</th>
+                    </tr>
+                </thead>
+                <tbody id="logTableBody">
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        async function fetchLogs() {
+            const response = await fetch('/logs');
+            const logs = await response.json();
+            const tableBody = document.getElementById('logTableBody');
+
+            logs.sort((a, b) => b.downloads - a.downloads);
+
+            logs.forEach((log, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-4 py-2">${index + 1}</td>
+                    <td class="px-4 py-2">${log.userId}</td>
+                    <td class="px-4 py-2">${log.userName}</td>
+                    <td class="px-4 py-2">${log.downloads}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        fetchLogs();
+    </script>
+</body>
+</html>
