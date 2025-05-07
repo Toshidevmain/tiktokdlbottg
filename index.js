@@ -3,7 +3,7 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 
-const bot = new Telegraf('7936250034:AAH5bB1U2m4ajbNr-noCXDbcPhNDSnu6rIw');
+const bot = new Telegraf('7936250034:AAGXGD6objH1Rdr4WC81YAdlXmJFs0W_cb0');
 const app = express();
 
 const adminId = '7810011711';
